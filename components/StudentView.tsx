@@ -456,8 +456,16 @@ export const StudentView: React.FC<StudentViewProps> = ({
                             ))}
                         </div>
                     )}
+                    
+                    <div className="animate-fade-in">
+                        <div className="prose prose-slate prose-lg max-w-none prose-headings:text-slate-800 prose-p:text-slate-600 prose-li:text-slate-600 prose-strong:text-slate-800 prose-img:rounded-xl prose-img:shadow-lg prose-video:w-full prose-video:rounded-xl">
+                            <div dangerouslySetInnerHTML={{ __html: selectedTopic.materials?.[activeMaterialTab]?.content || 'Materi belum tersedia' }} />
+                        </div>
+                    </div>
+
+                    {/* Assignments moved below content */}
                     {selectedTopic.materials?.[activeMaterialTab]?.assignments?.length > 0 && (
-                        <div className="mb-8 p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+                        <div className="mt-10 mb-8 p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
                             <h3 className="font-bold text-yellow-800 flex items-center gap-2 mb-3"><ClipboardList size={18}/> Tugas Kamu</h3>
                             <div className="space-y-3">
                                 {selectedTopic.materials[activeMaterialTab].assignments.map(asg => (
@@ -469,11 +477,7 @@ export const StudentView: React.FC<StudentViewProps> = ({
                             </div>
                         </div>
                     )}
-                    <div className="animate-fade-in">
-                        <div className="prose prose-slate prose-lg max-w-none prose-headings:text-slate-800 prose-p:text-slate-600 prose-li:text-slate-600 prose-strong:text-slate-800 prose-img:rounded-xl prose-img:shadow-lg prose-video:w-full prose-video:rounded-xl">
-                            <div dangerouslySetInnerHTML={{ __html: selectedTopic.materials?.[activeMaterialTab]?.content || 'Materi belum tersedia' }} />
-                        </div>
-                    </div>
+
                     <div className="mt-16 bg-slate-50 rounded-2xl p-8 border border-slate-200 text-center">
                         <div className={`w-16 h-16 ${theme.secondary} ${theme.text} rounded-full flex items-center justify-center mx-auto mb-4`}><Check size={32} strokeWidth={3} /></div>
                         <h3 className="text-xl font-bold text-slate-800 mb-2">Materi Selesai!</h3>

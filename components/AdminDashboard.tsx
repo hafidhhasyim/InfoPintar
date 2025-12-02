@@ -10,10 +10,7 @@ import { RichTextEditor } from './RichTextEditor';
 import { 
   Cpu, Network, Code, Database, Shield, Layout, Workflow, Disc, BarChart, Scale, MousePointer, 
   Calendar as CalendarIcon, Terminal, Cloud, Server, Smartphone, Tablet, HardDrive, Printer, 
-  Speaker, Video, Camera, MessageSquare, Mail, User, Globe, Monitor,
-  Binary, Brain, Bug, CircuitBoard, Command, FileCode, Fingerprint, Gamepad2, 
-  GitBranch, Headphones, Key, Laptop, Lightbulb, Link, Mic, Music, PenTool, 
-  Power, Radio, Save, Settings, Signal, Table, Tag, Wrench, Trash, Tv, Upload, Zap
+  Speaker, Video, Camera, MessageSquare, Mail, User, Globe, Monitor
 } from 'lucide-react';
 
 // Constants for Admin Tabs
@@ -57,36 +54,6 @@ const getIconComponent = (name: string, size = 20) => {
       case 'mail': return <Mail size={size} />;
       case 'user': return <User size={size} />;
       case 'globe': return <Globe size={size} />;
-      case 'binary': return <Binary size={size} />;
-      case 'brain': return <Brain size={size} />;
-      case 'bug': return <Bug size={size} />;
-      case 'circuit-board': return <CircuitBoard size={size} />;
-      case 'command': return <Command size={size} />;
-      case 'file-code': return <FileCode size={size} />;
-      case 'fingerprint': return <Fingerprint size={size} />;
-      case 'gamepad-2': return <Gamepad2 size={size} />;
-      case 'git-branch': return <GitBranch size={size} />;
-      case 'headphones': return <Headphones size={size} />;
-      case 'key': return <Key size={size} />;
-      case 'laptop': return <Laptop size={size} />;
-      case 'lightbulb': return <Lightbulb size={size} />;
-      case 'link': return <Link size={size} />;
-      case 'mic': return <Mic size={size} />;
-      case 'music': return <Music size={size} />;
-      case 'pen-tool': return <PenTool size={size} />;
-      case 'power': return <Power size={size} />;
-      case 'radio': return <Radio size={size} />;
-      case 'save': return <Save size={size} />;
-      case 'settings': return <Settings size={size} />;
-      case 'signal': return <Signal size={size} />;
-      case 'table': return <Table size={size} />;
-      case 'tag': return <Tag size={size} />;
-      case 'tool': return <Wrench size={size} />;
-      case 'trash': return <Trash size={size} />;
-      case 'tv': return <Tv size={size} />;
-      case 'type': return <Type size={size} />;
-      case 'upload': return <Upload size={size} />;
-      case 'zap': return <Zap size={size} />;
       
       default: return <FileText size={size} />;
     }
@@ -281,7 +248,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       
       setBannerImages(prev => {
           const updated = [...prev, newBanner];
-          localStorage.setItem('bannerImages', JSON.stringify(updated));
+          // Note: Sync to localStorage handled in App.tsx effect or here if needed explicitly
           return updated;
       });
       
@@ -294,7 +261,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       if(window.confirm("Hapus banner ini dari slider?")) {
           setBannerImages(prev => {
               const updated = prev.filter(b => b.id !== id);
-              localStorage.setItem('bannerImages', JSON.stringify(updated));
               return updated;
           });
           triggerToast("Banner dihapus");
@@ -309,7 +275,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const saveBannerEdit = (id: string) => {
       setBannerImages(prev => {
           const updated = prev.map(b => b.id === id ? { ...b, title: newBannerTitle } : b);
-          localStorage.setItem('bannerImages', JSON.stringify(updated));
           return updated;
       });
       setEditingBannerId(null);
